@@ -1,0 +1,34 @@
+//
+//  WeatherManagerAdditional.swift
+//  Weather
+//
+//  Created by Nikita Sibirtsev on 27/03/2022.
+//
+
+import Foundation
+
+struct WeatherAddData: Decodable {    
+    var timezone_offset: Int
+    var hourly: [Hourly]
+    var daily: [Daily]
+}
+
+
+struct Hourly: Decodable {
+    var dt: Int
+    var temp: Double
+    var weather: [Weather]
+}
+
+
+struct Daily: Decodable {
+    var dt: Int
+    var temp: Temp
+    var weather: [Weather]
+}
+
+
+struct Temp: Decodable {
+    var day: Double
+    var night: Double
+}

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="CustomTableViewCell" rowHeight="84" id="KGk-i7-Jjw" customClass="CustomTableViewCell" customModule="Weather" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="84"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="84"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="26 march" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GqC-Lj-zZ6">
+                        <rect key="frame" x="15" y="5" width="53.5" height="20"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="20" id="3yV-CA-HfK"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Saturday" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xYB-YG-rCb">
+                        <rect key="frame" x="15" y="30" width="78.5" height="24"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <stackView opaque="NO" contentMode="scaleToFill" spacing="11" translatesAutoresizingMaskIntoConstraints="NO" id="aiB-zi-8r7">
+                        <rect key="frame" x="198.5" y="22" width="106.5" height="40"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cloud" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="ujZ-dE-ik4">
+                                <rect key="frame" x="0.0" y="1.5" width="40" height="35.5"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="40" id="mjq-BK-kQh"/>
+                                    <constraint firstAttribute="height" constant="40" id="sa5-Hu-DHP"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-40°C" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TCS-lG-sPC">
+                                <rect key="frame" x="51" y="0.0" width="55.5" height="40"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                    </stackView>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="xYB-YG-rCb" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="Lw8-mU-6KY"/>
+                    <constraint firstItem="xYB-YG-rCb" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="RFf-Sg-Vux"/>
+                    <constraint firstItem="xYB-YG-rCb" firstAttribute="top" secondItem="GqC-Lj-zZ6" secondAttribute="bottom" constant="5" id="Rnl-Gp-Yny"/>
+                    <constraint firstItem="GqC-Lj-zZ6" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="a8G-ak-OV1"/>
+                    <constraint firstAttribute="trailing" secondItem="aiB-zi-8r7" secondAttribute="trailing" constant="15" id="j7o-yd-PjL"/>
+                    <constraint firstItem="aiB-zi-8r7" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="qIY-81-T1M"/>
+                    <constraint firstItem="GqC-Lj-zZ6" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="s1K-cM-ehn"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="dateLabel" destination="GqC-Lj-zZ6" id="mog-VJ-bRH"/>
+                <outlet property="dayLabel" destination="xYB-YG-rCb" id="9XI-MZ-uJo"/>
+                <outlet property="tempLabel" destination="TCS-lG-sPC" id="uWJ-ZU-WtD"/>
+                <outlet property="weatherImage" destination="ujZ-dE-ik4" id="4Vt-sc-Mni"/>
+            </connections>
+            <point key="canvasLocation" x="131.8840579710145" y="83.035714285714278"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="cloud" catalog="system" width="128" height="88"/>
+    </resources>
+</document>
