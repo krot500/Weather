@@ -14,11 +14,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        
+        let userDefaults = UserDefaults.standard
+        userDefaults.set(true, forKey: "run")
         
         
         
         return true
+    }
+    
+    func applicationWillTerminate(_ application: UIApplication) {
+        saveContext()
     }
 
     // MARK: UISceneSession Lifecycle

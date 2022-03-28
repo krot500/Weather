@@ -226,67 +226,6 @@
             </objects>
             <point key="canvasLocation" x="113.04347826086958" y="95.758928571428569"/>
         </scene>
-        <!--Welcome Controller-->
-        <scene sceneID="MUI-pf-mOn">
-            <objects>
-                <viewController id="45Q-Jw-MxK" customClass="WelcomeController" customModule="Weather" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="YJg-dp-cAW">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="7ma-yA-3gv">
-                                <rect key="frame" x="107" y="369" width="200" height="50"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="Y5G-rR-nVn"/>
-                                    <constraint firstAttribute="width" constant="200" id="pv2-gq-GHd"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
-                                <textInputTraits key="textInputTraits"/>
-                                <connections>
-                                    <outlet property="delegate" destination="45Q-Jw-MxK" id="Aph-XC-Fbl"/>
-                                </connections>
-                            </textField>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome to Weather app" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OlN-vM-9Ph">
-                                <rect key="frame" x="45" y="119" width="324.5" height="50"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="AI6-wj-8N4"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please, enter  place you wish" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="znI-ob-NLz">
-                                <rect key="frame" x="81.5" y="219" width="251.5" height="30"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="iC9-lB-h3g"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
-                        <viewLayoutGuide key="safeArea" id="f3e-iR-Pq7"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <constraints>
-                            <constraint firstItem="7ma-yA-3gv" firstAttribute="centerX" secondItem="YJg-dp-cAW" secondAttribute="centerX" id="1QP-7G-leX"/>
-                            <constraint firstItem="OlN-vM-9Ph" firstAttribute="centerX" secondItem="YJg-dp-cAW" secondAttribute="centerX" id="CFe-gk-SjB"/>
-                            <constraint firstItem="OlN-vM-9Ph" firstAttribute="top" secondItem="f3e-iR-Pq7" secondAttribute="top" constant="75" id="E8s-jw-173"/>
-                            <constraint firstItem="7ma-yA-3gv" firstAttribute="top" secondItem="znI-ob-NLz" secondAttribute="bottom" constant="120" id="hf2-by-k8N"/>
-                            <constraint firstItem="znI-ob-NLz" firstAttribute="top" secondItem="OlN-vM-9Ph" secondAttribute="bottom" constant="50" id="l0N-aC-ISh"/>
-                            <constraint firstItem="OlN-vM-9Ph" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="f3e-iR-Pq7" secondAttribute="leading" constant="40" id="ooX-K3-rHV"/>
-                            <constraint firstItem="znI-ob-NLz" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="f3e-iR-Pq7" secondAttribute="leading" constant="80" id="td3-pp-k8e"/>
-                            <constraint firstItem="znI-ob-NLz" firstAttribute="centerX" secondItem="YJg-dp-cAW" secondAttribute="centerX" id="xVB-Mk-29d"/>
-                        </constraints>
-                    </view>
-                    <navigationItem key="navigationItem" id="Rco-n0-pxM"/>
-                    <connections>
-                        <outlet property="welcomeField" destination="7ma-yA-3gv" id="uba-pG-rHh"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="w7V-t9-FJm" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="48" y="849"/>
-        </scene>
         <!--Menu Controller-->
         <scene sceneID="H1D-hz-avT">
             <objects>

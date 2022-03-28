@@ -11,7 +11,7 @@ import CoreData
 class ViewController: UIViewController {
     
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-    
+    let userDefaults = UserDefaults.standard
     var addWeather: WeatherAddModel?
     var weatherManager = WeatherManager()
     
@@ -55,16 +55,15 @@ class ViewController: UIViewController {
             blurView.isHidden = true
         }
         
-        
-        
-        for index in city.indices {
-            if city[index].isDisplay {
-                if let name = city[index].name{
-                    weatherManager.fetchWeather(cityName: name)
-                    print(name)
-                }
-            }
+        if userDefaults.bool(forKey: "run") {
+            runningApp()
+            userDefaults.set(false, forKey: "run")
         }
+        
+        
+        
+        
+        
                   
             //register cell
         let collectCell = UINib(nibName: const.collectionCellID, bundle: nil)
@@ -74,6 +73,7 @@ class ViewController: UIViewController {
         dailyWeatherTable.register(tableCell, forCellReuseIdentifier: const.tableCellID)
         
         dailyWeatherTable.separatorStyle = .none
+        dailyWeatherTable.allowsSelection = false
         
         dailyWeatherTable.reloadData()
         hourlyWeather.reloadData()
@@ -91,11 +91,73 @@ class ViewController: UIViewController {
     }
     
     @IBAction func makeStar(_ sender: UIButton) {
+        var indicator = true
+        
+        for index in self.city.indices {
+            if cityLabel.text == city[index].name {
+                context.delete(city[index])
+                self.city.remove(at: index)
+                saveCityList()
+                indicator = false
+               
+            }
+        }
+        if indicator {
+            let name = cityLabel.text
+            let city = City(context: self.context)
+            city.name = name
+            
+            city.isDisplay = true
+            for index in self.city.indices {
+                self.city[index].isDisplay = false
+            }
+            self.city.append(city)
+            saveCityList()
+            
+        }
+        configureStarButton()
+
     
     }
     
     @IBAction func searchFirst(sender: UIButton) {
+        if let name = welcomeField.text?.trimmingCharacters(in: .whitespaces) {
+            weatherManager.fetchWeather(cityName: name)
+            let city = City(context: self.context)
+            city.name = name
+            city.isDisplay = true
+            self.city.append(city)
+            saveCityList()
+            blurView.isHidden = true
+            view.endEditing(true)
+        }
+    }
+    
+    
+        // function to configure first weather info, when app is launching
+    func runningApp() {
+        for index in city.indices {
+            if city[index].isDisplay {
+                if let name = city[index].name{
+                    weatherManager.fetchWeather(cityName: name)
+                }
+            }
+        }
+    }
+    
+        // configure star button depends on if city in the database
+    func configureStarButton() {
         
+        for index in city.indices {
+            if cityLabel.text == city[index].name {
+                self.starButton.setImage(UIImage(systemName: "star.fill"), for: .normal)
+            } else {
+                self.starButton.setImage(UIImage(systemName: "star"), for: .normal)
+            }
+        }
+        if city.isEmpty {
+            self.starButton.setImage(UIImage(systemName: "star"), for: .normal)
+        }
     }
     
 }
@@ -109,11 +171,13 @@ extension ViewController: UISearchTextFieldDelegate {
         welcomeField.clearButtonMode = .always
     }
     
-    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        view.endEditing(true)
+    }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         
-        if let name = welcomeField.text {
+        if let name = welcomeField.text?.trimmingCharacters(in: .whitespaces) {
             weatherManager.fetchWeather(cityName: name)
             let city = City(context: self.context)
             city.name = name
@@ -121,6 +185,7 @@ extension ViewController: UISearchTextFieldDelegate {
             self.city.append(city)
             saveCityList()
             blurView.isHidden = true
+            view.endEditing(true)
         }
         
         return true
@@ -186,7 +251,7 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDelegateFlow
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: const.collectionCellID, for: indexPath) as! CustomCollectionViewCell
         if let weather = addWeather {
             cell.hourLabel.text = weather.hourString(dt: weather.hourly[indexPath.row].dt)
-            cell.weatherLabel.text = "\(weather.temperatureString(temp: weather.hourly[indexPath.row].temp))°C"
+            cell.weatherLabel.text = "\(weather.temperatureToString(temp: weather.hourly[indexPath.row].temp))"
             cell.weatherImage.image = UIImage(systemName: weather.conditionName(conditionId: weather.hourly[indexPath.row].weather[0].id))
         }
                
@@ -224,10 +289,11 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: const.tableCellID) as! CustomTableViewCell
         if let weather = addWeather {
             let date = weather.dayString(dt: weather.daily[indexPath.row].dt)
-            cell.dateLabel.text = date.0
-            cell.dayLabel.text = date.1
+            cell.dateLabel.text = date.day
+            cell.dayLabel.text = date.weekDay
             cell.weatherImage.image = UIImage(systemName: weather.conditionName(conditionId: weather.daily[indexPath.row].weather[0].id))
-            cell.tempLabel.text = "\(weather.daily[indexPath.row].temp)°C"
+            cell.tempLabel.text = "\(weather.temperatureToString(temp: weather.daily[indexPath.row].temp.day))/\(weather.temperatureToString(temp: weather.daily[indexPath.row].temp.night))"
+            
         }
        
         return cell
@@ -251,11 +317,11 @@ extension ViewController: WeatherManagerDelegate {
     }
     
     func didUpdateWeather(_ weatherManager: WeatherManager, weather: WeatherModel) {
-        print("current")
         DispatchQueue.main.async {
             self.cityLabel.text = weather.cityName
             self.tempLabel.text = weather.temperatureString
             self.weaherImage.image = UIImage(systemName: weather.conditionName)
+            self.configureStarButton()
         }
     }
     

@@ -16,9 +16,19 @@ struct WeatherAddModel {
     var hourly: [Hourly]
     var daily: [Daily]
     
-    func temperatureString(temp: Double) -> String {
-        return String(format: "%.1f", temp)
+    
+    
+    func temperatureToString(temp: Double) -> String {
+        let intTemp = Int(temp)
+        if intTemp > 0 {
+            let newStr = "+\(String(intTemp))°C"
+            return newStr
+        } else {
+            return "\(String(intTemp))°C"
+        }
     }
+    
+    
     
     func conditionName(conditionId: Int) -> String {
         switch conditionId {
@@ -42,7 +52,7 @@ struct WeatherAddModel {
     }
     
     func hourString(dt: Int) -> String {
-        let interval = timezone_offset + dt
+        let interval = /*timezone_offset +*/ dt
         let date = NSDate(timeIntervalSince1970: Double(interval))
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "HH:mm"
@@ -50,8 +60,8 @@ struct WeatherAddModel {
         return hourString
     }
     
-    func dayString(dt: Int) -> (String, String) {
-        let interval = timezone_offset + dt
+    func dayString(dt: Int) -> (day: String, weekDay: String) {
+        let interval = /* timezone_offset +*/ dt
         let date = NSDate(timeIntervalSince1970: Double(interval))
         let dateFormatter = DateFormatter()
         dateFormatter.dateStyle = .long
