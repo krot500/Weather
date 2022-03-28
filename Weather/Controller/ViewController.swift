@@ -15,8 +15,10 @@ class ViewController: UIViewController {
     var addWeather: WeatherAddModel?
     var weatherManager = WeatherManager()
     
+    
     let const = Constant()
     var city = [City]()
+    var cityName: String = ""
 
     @IBOutlet weak var hourlyWeather: UICollectionView!
     
@@ -43,10 +45,9 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         loadCityList()
-
         cofigureTextField()
-        
         weatherManager.delegate = self
+             
         
         
         if city.isEmpty {
@@ -55,9 +56,12 @@ class ViewController: UIViewController {
             blurView.isHidden = true
         }
         
+        
         if userDefaults.bool(forKey: "run") {
             runningApp()
             userDefaults.set(false, forKey: "run")
+        } else {
+            weatherManager.fetchWeather(cityName: cityName)
         }
         
         
@@ -80,8 +84,20 @@ class ViewController: UIViewController {
         
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
+    override func viewWillDisappear(_ animated: Bool) {
+        
+        if !city.isEmpty {
+            
+            for index in city.indices {
+                if city[index].name == cityLabel.text {
+                    userDefaults.set(cityLabel.text, forKey: "lastCity")
+                } else {
+                    userDefaults.set(city[0].name, forKey: "lastCity")
+                }
+            }
+            
+        }
+        
         
     }
     
@@ -135,10 +151,20 @@ class ViewController: UIViewController {
     
     
         // function to configure first weather info, when app is launching
-    func runningApp() {
+    /*func runningApp() {
         for index in city.indices {
             if city[index].isDisplay {
                 if let name = city[index].name{
+                    weatherManager.fetchWeather(cityName: name)
+                }
+            }
+        }
+    }*/
+    
+    func runningApp() {
+        if let name = userDefaults.string(forKey: "lastCity") {
+            for index in city.indices {
+                if city[index].name == name {
                     weatherManager.fetchWeather(cityName: name)
                 }
             }
@@ -151,6 +177,7 @@ class ViewController: UIViewController {
         for index in city.indices {
             if cityLabel.text == city[index].name {
                 self.starButton.setImage(UIImage(systemName: "star.fill"), for: .normal)
+                return
             } else {
                 self.starButton.setImage(UIImage(systemName: "star"), for: .normal)
             }
@@ -161,6 +188,9 @@ class ViewController: UIViewController {
     }
     
 }
+
+
+
 
 
     //MARK: - Textfield Stuff

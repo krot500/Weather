@@ -14,7 +14,7 @@
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="Weather" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Weather" id="BYZ-38-t0r" customClass="ViewController" customModule="Weather" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -219,7 +219,7 @@
                         <outlet property="tempLabel" destination="xbN-kQ-qBr" id="TvF-3B-imN"/>
                         <outlet property="weaherImage" destination="c8J-n1-qXm" id="KNO-2K-AiL"/>
                         <outlet property="welcomeField" destination="nab-mf-u8w" id="cNS-KB-fb6"/>
-                        <segue destination="lYr-V1-8Sf" kind="show" identifier="toMenu" id="rE4-bD-khQ"/>
+                        <segue destination="lYr-V1-8Sf" kind="presentation" identifier="toMenu" modalPresentationStyle="fullScreen" modalTransitionStyle="flipHorizontal" id="rE4-bD-khQ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -229,32 +229,19 @@
         <!--Menu Controller-->
         <scene sceneID="H1D-hz-avT">
             <objects>
-                <viewController id="lYr-V1-8Sf" customClass="MenuController" customModule="Weather" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Menu" id="lYr-V1-8Sf" customClass="MenuController" customModule="Weather" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="QDs-xb-X5P">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="Oel-ju-kMD">
-                                <rect key="frame" x="20" y="20" width="374" height="758"/>
+                                <rect key="frame" x="20" y="64" width="374" height="768"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="tZf-j2-nAE">
                                         <rect key="frame" x="0.0" y="0.0" width="374" height="40"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cwP-gd-X8L">
-                                                <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" constant="40" id="PkJ-FB-Ek0"/>
-                                                    <constraint firstAttribute="height" constant="40" id="rGo-f0-HIQ"/>
-                                                </constraints>
-                                                <state key="normal" title="Button"/>
-                                                <buttonConfiguration key="configuration" style="plain" image="list.dash" catalog="system" title=" "/>
-                                                <connections>
-                                                    <action selector="backToMain:" destination="lYr-V1-8Sf" eventType="touchUpInside" id="YUa-nL-Go4"/>
-                                                    <action selector="toListOfCity:" destination="BYZ-38-t0r" eventType="touchUpInside" id="v1r-SI-6qy"/>
-                                                </connections>
-                                            </button>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lRu-E0-rR0">
-                                                <rect key="frame" x="163" y="0.0" width="48" height="40"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lRu-E0-rR0">
+                                                <rect key="frame" x="0.0" y="0.0" width="374" height="40"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="40" id="75d-CL-qwL"/>
                                                 </constraints>
@@ -262,18 +249,6 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2UU-AN-IBY">
-                                                <rect key="frame" x="334" y="0.0" width="40" height="40"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="40" id="Eho-ZI-CvB"/>
-                                                    <constraint firstAttribute="width" constant="40" id="qBe-Y3-uZr"/>
-                                                </constraints>
-                                                <state key="normal" title="Button"/>
-                                                <buttonConfiguration key="configuration" style="plain" image="star" catalog="system" title=" "/>
-                                                <connections>
-                                                    <action selector="makeStar:" destination="BYZ-38-t0r" eventType="touchUpInside" id="V7j-pE-AkR"/>
-                                                </connections>
-                                            </button>
                                         </subviews>
                                     </stackView>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="lPy-o7-1FA">
@@ -282,10 +257,13 @@
                                             <constraint firstAttribute="height" constant="40" id="dap-ID-Ne4"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="words" returnKeyType="search" enablesReturnKeyAutomatically="YES" textContentType="address-level2"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="lYr-V1-8Sf" id="2Vx-md-MiG"/>
+                                        </connections>
                                     </textField>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="ryf-58-ggS">
-                                        <rect key="frame" x="0.0" y="140" width="374" height="618"/>
+                                        <rect key="frame" x="0.0" y="140" width="374" height="628"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" id="yB2-0A-fLy">
@@ -327,6 +305,7 @@
                     <connections>
                         <outlet property="cityTable" destination="ryf-58-ggS" id="NcF-jI-tny"/>
                         <outlet property="searchField" destination="lPy-o7-1FA" id="egJ-dB-BBk"/>
+                        <segue destination="BYZ-38-t0r" kind="presentation" identifier="toMain" modalPresentationStyle="fullScreen" modalTransitionStyle="flipHorizontal" id="566-y1-QRp"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Jbf-Pz-7kV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

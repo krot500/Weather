@@ -12,4 +12,5 @@ struct Constant {
     let tableCellID = "CustomTableViewCell"
     let toMenuSegue = "toMenu"
     let toWelcome = "toWelcome"
+    let toMain = "toMain"
 }
