@@ -96,6 +96,13 @@ extension MenuController: UITableViewDelegate, UITableViewDataSource {
         if let name = cityTable.cellForRow(at: indexPath)?.textLabel?.text {
             cityName = name
             cityTable.deselectRow(at: indexPath, animated: true)
+            for index in city.indices {
+                if city[index].name != cityName {
+                    city[index].isDisplay = false
+                } else {
+                    city[index].isDisplay = true
+                }
+            }
             performSegue(withIdentifier: const.toMain, sender: self)
         }
         

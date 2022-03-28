@@ -84,22 +84,7 @@ class ViewController: UIViewController {
         
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
-        
-        if !city.isEmpty {
-            
-            for index in city.indices {
-                if city[index].name == cityLabel.text {
-                    userDefaults.set(cityLabel.text, forKey: "lastCity")
-                } else {
-                    userDefaults.set(city[0].name, forKey: "lastCity")
-                }
-            }
-            
-        }
-        
-        
-    }
+    
     
     
     @IBAction func toListOfCity(_ sender: UIButton) {
@@ -109,10 +94,11 @@ class ViewController: UIViewController {
     @IBAction func makeStar(_ sender: UIButton) {
         var indicator = true
         
-        for index in self.city.indices {
+        for index in city.indices {
             if cityLabel.text == city[index].name {
                 context.delete(city[index])
-                self.city.remove(at: index)
+                city.remove(at: index)
+                city[0].isDisplay = true
                 saveCityList()
                 indicator = false
                
@@ -151,7 +137,7 @@ class ViewController: UIViewController {
     
     
         // function to configure first weather info, when app is launching
-    /*func runningApp() {
+    func runningApp() {
         for index in city.indices {
             if city[index].isDisplay {
                 if let name = city[index].name{
@@ -159,17 +145,9 @@ class ViewController: UIViewController {
                 }
             }
         }
-    }*/
-    
-    func runningApp() {
-        if let name = userDefaults.string(forKey: "lastCity") {
-            for index in city.indices {
-                if city[index].name == name {
-                    weatherManager.fetchWeather(cityName: name)
-                }
-            }
-        }
     }
+    
+    
     
         // configure star button depends on if city in the database
     func configureStarButton() {

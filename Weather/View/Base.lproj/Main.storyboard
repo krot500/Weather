@@ -219,7 +219,7 @@
                         <outlet property="tempLabel" destination="xbN-kQ-qBr" id="TvF-3B-imN"/>
                         <outlet property="weaherImage" destination="c8J-n1-qXm" id="KNO-2K-AiL"/>
                         <outlet property="welcomeField" destination="nab-mf-u8w" id="cNS-KB-fb6"/>
-                        <segue destination="lYr-V1-8Sf" kind="presentation" identifier="toMenu" modalPresentationStyle="fullScreen" modalTransitionStyle="flipHorizontal" id="rE4-bD-khQ"/>
+                        <segue destination="lYr-V1-8Sf" kind="presentation" identifier="toMenu" modalPresentationStyle="fullScreen" id="rE4-bD-khQ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -305,7 +305,7 @@
                     <connections>
                         <outlet property="cityTable" destination="ryf-58-ggS" id="NcF-jI-tny"/>
                         <outlet property="searchField" destination="lPy-o7-1FA" id="egJ-dB-BBk"/>
-                        <segue destination="BYZ-38-t0r" kind="presentation" identifier="toMain" modalPresentationStyle="fullScreen" modalTransitionStyle="flipHorizontal" id="566-y1-QRp"/>
+                        <segue destination="BYZ-38-t0r" kind="presentation" identifier="toMain" modalPresentationStyle="fullScreen" modalTransitionStyle="coverVertical" id="566-y1-QRp"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Jbf-Pz-7kV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
