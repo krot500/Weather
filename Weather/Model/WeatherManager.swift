@@ -23,13 +23,13 @@ struct WeatherManager {
         let urlString = "\(weatherURL)&q=\(cityName)"
         performRequest(with: urlString)
     }
-    
-    
+    //MARK: - Requesting
+    // request weather form OpenWeather
     private func performRequest(with urlString: String) {
         
         var lon: Double = 0
         var lat: Double = 0
-        
+        // current weather
         if let url = URL(string: urlString) {
             let session = URLSession(configuration: .default)
             let task = session.dataTask(with: url) { (data, response, error) in
@@ -42,11 +42,13 @@ struct WeatherManager {
                         self.delegate?.didUpdateWeather(self, weather: weather)
                         lat = weather.lat
                         lon = weather.lon
+                        print("data received")
                     }
                 }
             }
             
             task.resume()
+            // hourly and daily weather
             let newURL = URL(string: "&\(addWeatherURL)&lat=\(lat)&lon=\(lon)")!
             let taskAdditional = session.dataTask(with: newURL) { data, response, error in
                 if error != nil {
@@ -56,6 +58,7 @@ struct WeatherManager {
                 if let safeData = data {
                     if let weather = self.parseJSONAdd(safeData) {
                         self.delegate?.didUpdateWeatherAdditional(self, weather: weather)
+                        print("task2")
                     }
                 }
             }
@@ -63,6 +66,9 @@ struct WeatherManager {
         }
     }
     
+    
+    //MARK: - Parsing
+    // for current weather
     private func parseJSON (_ weatherData: Data) -> WeatherModel? {
         let decoder = JSONDecoder()
         do {
@@ -81,7 +87,7 @@ struct WeatherManager {
         }
         
     }
-    
+    // for forecast
     private func parseJSONAdd(_ weatherData: Data) -> WeatherAddModel? {
         let decoder = JSONDecoder()
         do {

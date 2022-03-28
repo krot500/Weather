@@ -7,6 +7,10 @@
 
 import Foundation
 
+
+//for current
+
+
 struct WeatherModel {
     let cityName: String
     let conditionId: Int

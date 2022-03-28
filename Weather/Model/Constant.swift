@@ -11,4 +11,5 @@ struct Constant {
     let collectionCellID = "CustomCollectionViewCell"
     let tableCellID = "CustomTableViewCell"
     let toMenuSegue = "toMenu"
+    let toWelcome = "toWelcome"
 }

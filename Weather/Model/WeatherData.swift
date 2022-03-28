@@ -9,6 +9,8 @@
 import Foundation
 
 
+// for current weather
+
 
 struct WeatherData: Decodable {
     var name: String
@@ -21,7 +23,7 @@ struct WeatherData: Decodable {
 struct Main: Decodable {
     var temp: Double
 }
-
+// used both for current and for forecast(daily, hourly)
 struct Weather: Decodable {
     var id: Int
 }

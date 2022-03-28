@@ -7,6 +7,10 @@
 
 import Foundation
 
+
+// fo forecast
+
+
 struct WeatherAddData: Decodable {    
     var timezone_offset: Int
     var hourly: [Hourly]

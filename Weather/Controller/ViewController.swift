@@ -10,6 +10,10 @@ import CoreData
 
 class ViewController: UIViewController {
     
+    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    
+    var addWeather: WeatherAddModel?
+    var weatherManager = WeatherManager()
     
     let const = Constant()
     var city = [City]()
@@ -30,13 +34,39 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var starButton: UIButton!
     
+    @IBOutlet weak var welcomeField: UITextField!
+    
+    @IBOutlet weak var blurView: UIView!
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        loadCityList()
+
+        cofigureTextField()
         
-              
+        weatherManager.delegate = self
         
-        //register cell
+        
+        if city.isEmpty {
+            blurView.isHidden = false
+        } else {
+            blurView.isHidden = true
+        }
+        
+        
+        
+        for index in city.indices {
+            if city[index].isDisplay {
+                if let name = city[index].name{
+                    weatherManager.fetchWeather(cityName: name)
+                    print(name)
+                }
+            }
+        }
+                  
+            //register cell
         let collectCell = UINib(nibName: const.collectionCellID, bundle: nil)
         hourlyWeather.register(collectCell, forCellWithReuseIdentifier: const.collectionCellID)
         
@@ -47,6 +77,12 @@ class ViewController: UIViewController {
         
         dailyWeatherTable.reloadData()
         hourlyWeather.reloadData()
+        
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
     }
     
     
@@ -55,13 +91,81 @@ class ViewController: UIViewController {
     }
     
     @IBAction func makeStar(_ sender: UIButton) {
+    
+    }
+    
+    @IBAction func searchFirst(sender: UIButton) {
+        
+    }
+    
+}
+
+
+    //MARK: - Textfield Stuff
+
+extension ViewController: UISearchTextFieldDelegate {
+    
+    func cofigureTextField() {
+        welcomeField.clearButtonMode = .always
     }
     
     
-
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        
+        if let name = welcomeField.text {
+            weatherManager.fetchWeather(cityName: name)
+            let city = City(context: self.context)
+            city.name = name
+            city.isDisplay = true
+            self.city.append(city)
+            saveCityList()
+            blurView.isHidden = true
+        }
+        
+        return true
+    }
+    
+    
+    
+    
 }
 
+
+    //MARK: - Core Data Stuff
+
+
+
+extension ViewController {
+    
+   
+    
+    private func loadCityList() {
+        let request: NSFetchRequest<City> = City.fetchRequest()
+        do {
+            try city = context.fetch(request)
+        } catch {
+            print("Loading error \(error)")
+        }
+    }
+    
+
+
+    private func saveCityList() {
+        do {
+            try context.save()
+        } catch {
+            print("Save error: \(error)")
+        }
+    }
+    
+}
+
+
+
+
     //MARK: - COLLECTION VIEW STUFF
+
 
 extension ViewController: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
     
@@ -80,8 +184,12 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDelegateFlow
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: const.collectionCellID, for: indexPath) as! CustomCollectionViewCell
+        if let weather = addWeather {
+            cell.hourLabel.text = weather.hourString(dt: weather.hourly[indexPath.row].dt)
+            cell.weatherLabel.text = "\(weather.temperatureString(temp: weather.hourly[indexPath.row].temp))°C"
+            cell.weatherImage.image = UIImage(systemName: weather.conditionName(conditionId: weather.hourly[indexPath.row].weather[0].id))
+        }
                
-        
         return cell
     }
     
@@ -100,6 +208,7 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDelegateFlow
 
     //MARK: - TABLE VIEW STUFF
 
+
 extension ViewController: UITableViewDelegate, UITableViewDataSource {
     
     
@@ -113,6 +222,13 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: const.tableCellID) as! CustomTableViewCell
+        if let weather = addWeather {
+            let date = weather.dayString(dt: weather.daily[indexPath.row].dt)
+            cell.dateLabel.text = date.0
+            cell.dayLabel.text = date.1
+            cell.weatherImage.image = UIImage(systemName: weather.conditionName(conditionId: weather.daily[indexPath.row].weather[0].id))
+            cell.tempLabel.text = "\(weather.daily[indexPath.row].temp)°C"
+        }
        
         return cell
     }
@@ -121,18 +237,30 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
 }
 
 
+    //MARK: - Weather Manager Stuff
+
+
 extension ViewController: WeatherManagerDelegate {
+    
     func didUpdateWeatherAdditional(_ weatherManager: WeatherManager, weather: WeatherAddModel) {
-        <#code#>
+        DispatchQueue.main.async {
+            self.addWeather = WeatherAddModel(timezone_offset: weather.timezone_offset, hourly: weather.hourly, daily: weather.daily)
+            self.hourlyWeather.reloadData()
+            self.dailyWeatherTable.reloadData()
+        }
     }
     
     func didUpdateWeather(_ weatherManager: WeatherManager, weather: WeatherModel) {
-        <#code#>
+        print("current")
+        DispatchQueue.main.async {
+            self.cityLabel.text = weather.cityName
+            self.tempLabel.text = weather.temperatureString
+            self.weaherImage.image = UIImage(systemName: weather.conditionName)
+        }
     }
     
     func didFailWithError(error: Error) {
-        <#code#>
+        print(error)
     }
-    
     
 }
