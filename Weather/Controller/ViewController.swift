@@ -327,7 +327,7 @@ extension ViewController: WeatherManagerDelegate {
     func didUpdateWeather(_ weatherManager: WeatherManager, weather: WeatherModel) {
         DispatchQueue.main.async {
             self.cityLabel.text = weather.cityName
-            self.tempLabel.text = weather.temperatureString
+            self.tempLabel.text = weather.temperatureToString(temp: weather.temperature)
             self.weaherImage.image = UIImage(systemName: weather.conditionName)
             self.configureStarButton()
         }

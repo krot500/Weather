@@ -14,9 +14,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        
+            // need to know that it's the first launching of the app
         let userDefaults = UserDefaults.standard
         userDefaults.set(true, forKey: "run")
-        
+              
         
         
         return true

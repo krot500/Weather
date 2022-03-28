@@ -22,6 +22,16 @@ struct WeatherModel {
         return String(format: "%.0f", temperature)
     }
     
+    func temperatureToString(temp: Double) -> String {
+        let intTemp = Int(temp)
+        if intTemp > 0 {
+            let newStr = "+\(String(intTemp))"
+            return newStr
+        } else {
+            return "\(String(intTemp))"
+        }
+    }
+    
     var conditionName: String {
         switch conditionId {
         case 200...232:

@@ -42,6 +42,10 @@ class MenuController: UIViewController {
        
     }
     
+    @IBAction func backToWeather(dender: UIButton) {
+        self.dismiss(animated: true)
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == const.toMain {
             let destinationVC = segue.destination as! ViewController
@@ -89,6 +93,8 @@ extension MenuController: UITableViewDelegate, UITableViewDataSource {
         let cell = cityTable.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
         cell.textLabel?.text = city[indexPath.row].name
         cell.textLabel?.textAlignment = .center
+        cell.textLabel?.font = UIFont.systemFont(ofSize: 25)
+        
         return cell
     }
     

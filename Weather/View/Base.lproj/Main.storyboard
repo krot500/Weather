@@ -144,7 +144,7 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="20" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="nab-mf-u8w">
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter location" minimumFontSize="20" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="nab-mf-u8w">
                                         <rect key="frame" x="82" y="260" width="250" height="50"/>
                                         <constraints>
                                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="250" id="LI5-6a-EvE"/>
@@ -240,23 +240,23 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="tZf-j2-nAE">
                                         <rect key="frame" x="0.0" y="0.0" width="374" height="40"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lRu-E0-rR0">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your locations" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lRu-E0-rR0">
                                                 <rect key="frame" x="0.0" y="0.0" width="374" height="40"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="40" id="75d-CL-qwL"/>
                                                 </constraints>
-                                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                         </subviews>
                                     </stackView>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="lPy-o7-1FA">
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Ener location" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="lPy-o7-1FA">
                                         <rect key="frame" x="30" y="70" width="314" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="dap-ID-Ne4"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="words" returnKeyType="search" enablesReturnKeyAutomatically="YES" textContentType="address-level2"/>
                                         <connections>
                                             <outlet property="delegate" destination="lYr-V1-8Sf" id="2Vx-md-MiG"/>
@@ -291,14 +291,24 @@
                                     <constraint firstAttribute="bottom" secondItem="ryf-58-ggS" secondAttribute="bottom" id="reA-Mk-r7A"/>
                                 </constraints>
                             </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="myw-8x-mn0">
+                                <rect key="frame" x="20" y="69" width="56" height="31"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Back"/>
+                                <connections>
+                                    <action selector="backToWeatherWithDender:" destination="lYr-V1-8Sf" eventType="touchUpInside" id="un5-dC-Svv"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="mYI-FY-gHO"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="mYI-FY-gHO" firstAttribute="trailing" secondItem="Oel-ju-kMD" secondAttribute="trailing" constant="20" id="8x5-MQ-yJn"/>
                             <constraint firstItem="mYI-FY-gHO" firstAttribute="bottom" secondItem="Oel-ju-kMD" secondAttribute="bottom" constant="30" id="SjX-XI-Neg"/>
+                            <constraint firstItem="myw-8x-mn0" firstAttribute="top" secondItem="mYI-FY-gHO" secondAttribute="top" constant="25" id="VKX-j7-nSc"/>
                             <constraint firstItem="Oel-ju-kMD" firstAttribute="leading" secondItem="mYI-FY-gHO" secondAttribute="leading" constant="20" id="lOE-Xb-gdy"/>
                             <constraint firstItem="Oel-ju-kMD" firstAttribute="top" secondItem="mYI-FY-gHO" secondAttribute="top" constant="20" id="r9x-gc-Cuf"/>
+                            <constraint firstItem="myw-8x-mn0" firstAttribute="leading" secondItem="mYI-FY-gHO" secondAttribute="leading" constant="20" id="s6M-m9-jAv"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="rKe-bn-7sG"/>
