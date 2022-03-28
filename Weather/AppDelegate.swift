@@ -22,8 +22,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
     
+    
+    
+    func applicationDidEnterBackground(_ application: UIApplication) {
+        saveContext()
+        let vc = ViewController()
+        vc.saveLastCity()
+    }
+    
+    
+    
     func applicationWillTerminate(_ application: UIApplication) {
         saveContext()
+        let vc = ViewController()
+        vc.saveLastCity()
     }
 
     // MARK: UISceneSession Lifecycle

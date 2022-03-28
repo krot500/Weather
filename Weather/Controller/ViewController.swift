@@ -85,20 +85,7 @@ class ViewController: UIViewController {
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        
-        if !city.isEmpty {
-            
-            for index in city.indices {
-                if city[index].name == cityLabel.text {
-                    userDefaults.set(cityLabel.text, forKey: "lastCity")
-                } else {
-                    userDefaults.set(city[0].name, forKey: "lastCity")
-                }
-            }
-            
-        }
-        
-        
+        saveLastCity()
     }
     
     
@@ -122,11 +109,6 @@ class ViewController: UIViewController {
             let name = cityLabel.text
             let city = City(context: self.context)
             city.name = name
-            
-            city.isDisplay = true
-            for index in self.city.indices {
-                self.city[index].isDisplay = false
-            }
             self.city.append(city)
             saveCityList()
             
@@ -141,7 +123,6 @@ class ViewController: UIViewController {
             weatherManager.fetchWeather(cityName: name)
             let city = City(context: self.context)
             city.name = name
-            city.isDisplay = true
             self.city.append(city)
             saveCityList()
             blurView.isHidden = true
@@ -150,18 +131,26 @@ class ViewController: UIViewController {
     }
     
     
-        // function to configure first weather info, when app is launching
-    /*func runningApp() {
-        for index in city.indices {
-            if city[index].isDisplay {
-                if let name = city[index].name{
-                    weatherManager.fetchWeather(cityName: name)
+        // saves last city from databse which was displayed, to display it nexxt time
+    func saveLastCity() {
+        if !city.isEmpty {
+            
+            for index in city.indices {
+                if city[index].name == cityLabel.text {
+                    userDefaults.set(cityLabel.text, forKey: "lastCity")
+                    return
+                } else {
+                    userDefaults.set(city[0].name, forKey: "lastCity")
                 }
             }
+            
         }
-    }*/
+    }
     
-    func runningApp() {
+    
+        // function to configure first weather info, when app is launching
+        
+    private func runningApp() {
         if let name = userDefaults.string(forKey: "lastCity") {
             for index in city.indices {
                 if city[index].name == name {
@@ -172,7 +161,7 @@ class ViewController: UIViewController {
     }
     
         // configure star button depends on if city in the database
-    func configureStarButton() {
+    private func configureStarButton() {
         
         for index in city.indices {
             if cityLabel.text == city[index].name {
@@ -197,7 +186,7 @@ class ViewController: UIViewController {
 
 extension ViewController: UISearchTextFieldDelegate {
     
-    func cofigureTextField() {
+    private func cofigureTextField() {
         welcomeField.clearButtonMode = .always
     }
     
@@ -211,7 +200,6 @@ extension ViewController: UISearchTextFieldDelegate {
             weatherManager.fetchWeather(cityName: name)
             let city = City(context: self.context)
             city.name = name
-            city.isDisplay = true
             self.city.append(city)
             saveCityList()
             blurView.isHidden = true
