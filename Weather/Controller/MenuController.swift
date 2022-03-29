@@ -94,7 +94,7 @@ extension MenuController: UITableViewDelegate, UITableViewDataSource {
         let cell = cityTable.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
         cell.textLabel?.text = city[indexPath.row].name
         cell.textLabel?.textAlignment = .center
-        cell.textLabel?.font = UIFont.systemFont(ofSize: 25)
+        cell.textLabel?.font = UIFont(name: "AvenirNext-Regular", size: 25)
         
         return cell
     }

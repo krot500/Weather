@@ -49,6 +49,8 @@ class ViewController: UIViewController {
         loadCityList()
         cofigureTextField()
         weatherManager.delegate = self
+        
+        
              
         
         
@@ -142,6 +144,7 @@ class ViewController: UIViewController {
             
         }
     }
+    
     
     
         // function to configure first weather info, when app is launching

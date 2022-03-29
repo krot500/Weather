@@ -6,7 +6,7 @@
 //
 
 import Foundation
-import CoreImage
+
     
 protocol WeatherManagerDelegate {
     func didUpdateWeatherAdditional(_ weatherManager: WeatherManager, weather: WeatherAddModel)
