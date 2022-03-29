@@ -19,6 +19,8 @@ class ViewController: UIViewController {
     let const = Constant()
     var city = [City]()
     var cityName: String = ""
+    
+    //MARK: - OUTLETS
 
     @IBOutlet weak var hourlyWeather: UICollectionView!
     
@@ -40,7 +42,7 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var blurView: UIView!
     
-    
+        //MARK: - METHODS OF CLASS
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -133,20 +135,17 @@ class ViewController: UIViewController {
     
     @IBAction func searchFirst(sender: UIButton) {
         if let name = welcomeField.text {
-            let city = City(context: self.context)
-            city.name = name
-            city.isDisplay = true
-            self.city.append(city)
-            saveCityList()
-            weatherManager.fetchWeather(cityName: name)
-            blurView.isHidden = true
+            
+           
             view.endEditing(true)
+            weatherManager.fetchWeather(cityName: name)
+            
         }
     }
     
     
         // function to configure first weather info, when app is launching
-    func runningApp() {
+    private func runningApp() {
         for index in city.indices {
             if city[index].isDisplay {
                 if let name = city[index].name{
@@ -159,7 +158,7 @@ class ViewController: UIViewController {
     
     
         // configure star button depends on if city in the database
-    func configureStarButton() {
+    private func configureStarButton() {
         
         for index in city.indices {
 //            print(cityLabel.text, "label")
@@ -183,7 +182,7 @@ class ViewController: UIViewController {
 
 
 
-    //MARK: - Textfield Stuff
+    //MARK: - WELCOME TEXT FIELD STUFF
 
 extension ViewController: UISearchTextFieldDelegate {
     
@@ -198,14 +197,11 @@ extension ViewController: UISearchTextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         
         if let name = welcomeField.text {
-            weatherManager.fetchWeather(cityName: name)
-            let city = City(context: self.context)
-            city.name = name
-            city.isDisplay = true
-            self.city.append(city)
-            saveCityList()
-            blurView.isHidden = true
+            
+            //blurView.isHidden = true
             view.endEditing(true)
+            weatherManager.fetchWeather(cityName: name)
+            
         }
         
         return true
@@ -217,7 +213,7 @@ extension ViewController: UISearchTextFieldDelegate {
 }
 
 
-    //MARK: - Core Data Stuff
+    //MARK: - CORE DATA STAFF
 
 
 
@@ -249,7 +245,7 @@ extension ViewController {
 
 
 
-    //MARK: - COLLECTION VIEW STUFF
+    //MARK: - HOURLY FORECAST COLLECTION VIEW STUFF
 
 
 extension ViewController: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
@@ -291,7 +287,7 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDelegateFlow
 }
 
 
-    //MARK: - TABLE VIEW STUFF
+    //MARK: - DAILY FORECAST TABLE VIEW STUFF
 
 
 extension ViewController: UITableViewDelegate, UITableViewDataSource {
@@ -323,7 +319,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
 }
 
 
-    //MARK: - Weather Manager Stuff
+    //MARK: - Weather Manager DELEGATE
 
 
 extension ViewController: WeatherManagerDelegate {
@@ -337,19 +333,35 @@ extension ViewController: WeatherManagerDelegate {
     }
     
     func didUpdateWeather(_ weatherManager: WeatherManager, weather: WeatherModel) {
+        if self.city.isEmpty {
+            let city = City(context: self.context)
+            city.name = weather.cityName
+            city.isDisplay = true
+            self.city.append(city)
+            self.saveCityList()
+            blurView.isHidden = true
+        }
         DispatchQueue.main.async {
             self.cityLabel.text = weather.cityName
             self.tempLabel.text = weather.temperatureToString(temp: weather.temperature)
             self.weaherImage.image = UIImage(systemName: weather.conditionName)
+            
             self.configureStarButton()
         }
+        
     }
     
     func didFailWithError(error: Error) {
         print(error)
         let alert = UIAlertController(title: "Error", message: "We cannot find your location", preferredStyle: .alert)
         let action = UIAlertAction(title: "Try again", style: .default) { action in
-            self.performSegue(withIdentifier: self.const.toMenuSegue, sender: self)
+            if self.city.isEmpty {
+                self.welcomeField.isHidden = false
+                self.viewDidLoad()
+            } else {
+                self.performSegue(withIdentifier: self.const.toMenuSegue, sender: self)
+            }
+            
         }
         let cancelAction = UIAlertAction(title: "Cancel", style: .default) { cancelAction in
             self.userDefaults.set(true, forKey: "run")
@@ -357,7 +369,11 @@ extension ViewController: WeatherManagerDelegate {
         }
         alert.addAction(action)
         alert.addAction(cancelAction)
-        self.present(alert, animated: true, completion: nil)
+        DispatchQueue.main.async {
+            self.present(alert, animated: true, completion: nil)
+            print(self.city)
+        }
+        
     }
     
 }
