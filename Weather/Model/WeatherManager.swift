@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import CoreImage
     
 protocol WeatherManagerDelegate {
     func didUpdateWeatherAdditional(_ weatherManager: WeatherManager, weather: WeatherAddModel)
@@ -20,7 +21,13 @@ struct WeatherManager {
     var delegate: WeatherManagerDelegate?
     
     func fetchWeather (cityName: String) {
-        let urlString = "\(weatherURL)&q=\(cityName)"
+        
+        var preparedName = cityName.replacingOccurrences(of: " ", with: "%20")
+        preparedName = preparedName.replacingOccurrences(of: "-", with: "%20")
+        preparedName += "%20"   //need to openweather search City indtead of region (oblast)
+        
+        
+        let urlString = "\(weatherURL)&q=\(preparedName)"
         performRequest(with: urlString)
     }
     

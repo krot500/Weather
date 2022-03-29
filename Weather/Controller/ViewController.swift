@@ -60,14 +60,16 @@ class ViewController: UIViewController {
         if userDefaults.bool(forKey: "run") {
             runningApp()
             userDefaults.set(false, forKey: "run")
-        } else {
+        } else if cityName != "" {
             weatherManager.fetchWeather(cityName: cityName)
+        } else {
+            runningApp()
         }
         
         
         
         
-        
+        cityName = ""
                   
             //register cell
         let collectCell = UINib(nibName: const.collectionCellID, bundle: nil)
@@ -123,7 +125,7 @@ class ViewController: UIViewController {
     }
     
     @IBAction func searchFirst(sender: UIButton) {
-        if let name = welcomeField.text?.trimmingCharacters(in: .whitespaces) {
+        if let name = welcomeField.text {
             weatherManager.fetchWeather(cityName: name)
             let city = City(context: self.context)
             city.name = name
@@ -185,7 +187,7 @@ extension ViewController: UISearchTextFieldDelegate {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         
-        if let name = welcomeField.text?.trimmingCharacters(in: .whitespaces) {
+        if let name = welcomeField.text {
             weatherManager.fetchWeather(cityName: name)
             let city = City(context: self.context)
             city.name = name
@@ -335,6 +337,17 @@ extension ViewController: WeatherManagerDelegate {
     
     func didFailWithError(error: Error) {
         print(error)
+        let alert = UIAlertController(title: "Error", message: "We cannot find your location", preferredStyle: .alert)
+        let action = UIAlertAction(title: "Try again", style: .default) { action in
+            self.performSegue(withIdentifier: self.const.toMenuSegue, sender: self)
+        }
+        let cancelAction = UIAlertAction(title: "Cancel", style: .default) { cancelAction in
+            self.userDefaults.set(true, forKey: "run")
+            self.viewDidLoad()
+        }
+        alert.addAction(action)
+        alert.addAction(cancelAction)
+        self.present(alert, animated: true, completion: nil)
     }
     
 }

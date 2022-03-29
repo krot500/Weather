@@ -37,13 +37,13 @@ class MenuController: UIViewController {
         super.viewDidLoad()
         loadCityList()
         
-       // let cityTableCell = UINib(nibName: const.tableCellID, bundle: nil)
+      
 
        
     }
     
     @IBAction func backToWeather(dender: UIButton) {
-        self.dismiss(animated: true)
+        self.performSegue(withIdentifier: const.toMain, sender: self)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -61,9 +61,10 @@ extension MenuController: UITextFieldDelegate {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         
-        if let city =  searchField.text?.trimmingCharacters(in: .whitespaces) {
+        if let city =  searchField.text {
             cityName = city
             performSegue(withIdentifier: const.toMain, sender: self)
+            cityName = ""
         }
         
         searchField.endEditing(true)
