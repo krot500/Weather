@@ -17,11 +17,13 @@ struct WeatherData: Decodable {
     var main: Main
     var weather: [Weather]
     var coord: Coord
+    var wind: Wind
     
 }
 
 struct Main: Decodable {
     var temp: Double
+    var feels_like: Double
 }
 // used both for current and for forecast(daily, hourly)
 struct Weather: Decodable {
@@ -31,4 +33,9 @@ struct Weather: Decodable {
 struct Coord: Decodable {
     var lon: Double
     var lat: Double
+}
+
+struct Wind: Decodable {
+    var speed: Double
+    var deg: Int
 }

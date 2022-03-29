@@ -94,8 +94,14 @@ struct WeatherManager {
             let cityName = decodedData.name
             let lat = decodedData.coord.lat
             let lon = decodedData.coord.lon
+            let feelsLike = decodedData.main.feels_like
+            let windSpeed = decodedData.wind.speed
+            let windDeg = decodedData.wind.deg
             
-            let weather = WeatherModel(cityName: cityName, conditionId: id, temperature: temperature, lat: lat, lon: lon)
+            let weather = WeatherModel(cityName: cityName, conditionId: id,
+                                       temperature: temperature, lat: lat, lon: lon,
+                                       feelsLike: feelsLike, windSpeed: windSpeed,
+                                       windDeg: windDeg)
             return weather
         } catch {
             delegate?.didFailWithError(error: error)

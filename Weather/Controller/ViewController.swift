@@ -20,8 +20,10 @@ class ViewController: UIViewController {
     var city = [City]()
     var cityName: String = ""
     
+    
     //MARK: - OUTLETS
 
+    
     @IBOutlet weak var hourlyWeather: UICollectionView!
     
     @IBOutlet weak var cityLabel: UILabel!
@@ -42,7 +44,11 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var blurView: UIView!
     
-        //MARK: - METHODS OF CLASS
+    @IBOutlet weak var feelsLikeWinterLabel: UILabel!
+    
+    
+    //MARK: - METHODS OF CLASS
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -181,10 +187,8 @@ class ViewController: UIViewController {
 }
 
 
-
-
-
     //MARK: - WELCOME TEXT FIELD STUFF
+
 
 extension ViewController: UISearchTextFieldDelegate {
     
@@ -218,7 +222,6 @@ extension ViewController: UISearchTextFieldDelegate {
     //MARK: - CORE DATA STAFF
 
 
-
 extension ViewController {
     
    
@@ -243,8 +246,6 @@ extension ViewController {
     }
     
 }
-
-
 
 
     //MARK: - HOURLY FORECAST COLLECTION VIEW STUFF
@@ -350,6 +351,7 @@ extension ViewController: WeatherManagerDelegate {
             self.cityLabel.text = weather.cityName
             self.tempLabel.text = weather.temperatureToString(temp: weather.temperature)
             self.weaherImage.image = UIImage(systemName: weather.conditionName)
+            self.feelsLikeWinterLabel.text = weather.additionalString()
             
             self.configureStarButton()
         }
