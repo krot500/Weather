@@ -52,12 +52,14 @@ struct WeatherAddModel {
     }
     
     func hourString(dt: Int) -> String {
-        let interval = /*timezone_offset +*/ dt
+        let timeDrift = timezone_offset - TimeZone.current.secondsFromGMT()
+        let interval = timeDrift + dt
         let date = Date(timeIntervalSince1970: Double(interval))
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "HH:mm"
-        let currentDate = Date()
-        if date < currentDate {
+        let systemDate = Date().timeIntervalSince1970
+        let currentDate = systemDate + Double(timeDrift)
+        if Double(interval) < currentDate {
             let hourString = "Now"
             return hourString
         } else {
