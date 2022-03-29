@@ -53,11 +53,18 @@ struct WeatherAddModel {
     
     func hourString(dt: Int) -> String {
         let interval = /*timezone_offset +*/ dt
-        let date = NSDate(timeIntervalSince1970: Double(interval))
+        let date = Date(timeIntervalSince1970: Double(interval))
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "HH:mm"
-        let hourString = dateFormatter.string(from: date as Date)
-        return hourString
+        let currentDate = Date()
+        if date < currentDate {
+            let hourString = "Now"
+            return hourString
+        } else {
+            let hourString = dateFormatter.string(from: date as Date)
+            return hourString
+        }
+        
     }
     
     func dayString(dt: Int) -> (day: String, weekDay: String) {
