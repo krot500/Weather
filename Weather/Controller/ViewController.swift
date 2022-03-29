@@ -97,12 +97,19 @@ class ViewController: UIViewController {
         var indicator = true
         
         for index in city.indices {
-            if cityLabel.text == city[index].name {
+            if cityLabel.text?.trimmingCharacters(in: .whitespaces) == city[index].name?.trimmingCharacters(in: .whitespaces) {
                 context.delete(city[index])
                 city.remove(at: index)
-                city[0].isDisplay = true
+                if city.isEmpty {
+                    viewDidLoad()
+                } else {
+                    city[0].isDisplay = true
+                }
+                
                 saveCityList()
                 indicator = false
+                configureStarButton()
+                return
                
             }
         }
@@ -126,12 +133,12 @@ class ViewController: UIViewController {
     
     @IBAction func searchFirst(sender: UIButton) {
         if let name = welcomeField.text {
-            weatherManager.fetchWeather(cityName: name)
             let city = City(context: self.context)
             city.name = name
             city.isDisplay = true
             self.city.append(city)
             saveCityList()
+            weatherManager.fetchWeather(cityName: name)
             blurView.isHidden = true
             view.endEditing(true)
         }
@@ -155,7 +162,10 @@ class ViewController: UIViewController {
     func configureStarButton() {
         
         for index in city.indices {
-            if cityLabel.text == city[index].name {
+//            print(cityLabel.text, "label")
+//            print(city[index].name, "data name")
+            if cityLabel.text?.trimmingCharacters(in: .whitespaces) == city[index].name?.trimmingCharacters(in: .whitespaces) {
+                
                 self.starButton.setImage(UIImage(systemName: "star.fill"), for: .normal)
                 return
             } else {
