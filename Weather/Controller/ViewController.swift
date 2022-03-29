@@ -136,7 +136,7 @@ class ViewController: UIViewController {
     @IBAction func searchFirst(sender: UIButton) {
         if let name = welcomeField.text {
             
-           
+            blurView.isHidden = true
             view.endEditing(true)
             weatherManager.fetchWeather(cityName: name)
             
@@ -161,8 +161,7 @@ class ViewController: UIViewController {
     private func configureStarButton() {
         
         for index in city.indices {
-//            print(cityLabel.text, "label")
-//            print(city[index].name, "data name")
+
             if cityLabel.text?.trimmingCharacters(in: .whitespaces) == city[index].name?.trimmingCharacters(in: .whitespaces) {
                 
                 self.starButton.setImage(UIImage(systemName: "star.fill"), for: .normal)
@@ -198,7 +197,7 @@ extension ViewController: UISearchTextFieldDelegate {
         
         if let name = welcomeField.text {
             
-            //blurView.isHidden = true
+            blurView.isHidden = true
             view.endEditing(true)
             weatherManager.fetchWeather(cityName: name)
             
@@ -339,7 +338,6 @@ extension ViewController: WeatherManagerDelegate {
             city.isDisplay = true
             self.city.append(city)
             self.saveCityList()
-            blurView.isHidden = true
         }
         DispatchQueue.main.async {
             self.cityLabel.text = weather.cityName
@@ -352,7 +350,7 @@ extension ViewController: WeatherManagerDelegate {
     }
     
     func didFailWithError(error: Error) {
-        print(error)
+        //print(error)
         let alert = UIAlertController(title: "Error", message: "We cannot find your location", preferredStyle: .alert)
         let action = UIAlertAction(title: "Try again", style: .default) { action in
             if self.city.isEmpty {
@@ -371,7 +369,6 @@ extension ViewController: WeatherManagerDelegate {
         alert.addAction(cancelAction)
         DispatchQueue.main.async {
             self.present(alert, animated: true, completion: nil)
-            print(self.city)
         }
         
     }
