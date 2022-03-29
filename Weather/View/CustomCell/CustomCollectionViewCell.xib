@@ -17,7 +17,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="98" height="153"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="14:00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DQD-zG-iXX">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DQD-zG-iXX">
                         <rect key="frame" x="24" y="21.5" width="50" height="20"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="50" id="TrW-f3-REb"/>
@@ -27,7 +27,7 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-40°C" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sRm-rJ-4Pc">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sRm-rJ-4Pc">
                         <rect key="frame" x="24" y="111.5" width="50" height="20"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="50" id="3Qz-vV-nOk"/>
@@ -37,8 +37,8 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cloud.rain" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="3AV-rs-rVP">
-                        <rect key="frame" x="24" y="51.5" width="50" height="51.5"/>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="3AV-rs-rVP">
+                        <rect key="frame" x="24" y="51.5" width="50" height="50"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="50" id="UOz-mA-46S"/>
                             <constraint firstAttribute="height" constant="50" id="kmv-8w-l7E"/>
@@ -64,7 +64,4 @@
             <point key="canvasLocation" x="104.34782608695653" y="103.45982142857143"/>
         </collectionViewCell>
     </objects>
-    <resources>
-        <image name="cloud.rain" catalog="system" width="125" height="128"/>
-    </resources>
 </document>

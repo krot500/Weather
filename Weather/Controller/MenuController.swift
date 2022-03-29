@@ -95,7 +95,8 @@ extension MenuController: UITableViewDelegate, UITableViewDataSource {
         cell.textLabel?.text = city[indexPath.row].name
         cell.textLabel?.textAlignment = .center
         cell.textLabel?.font = UIFont(name: "AvenirNext-Regular", size: 25)
-        
+        cell.alpha = 0
+        UIView.animate(withDuration: 1, animations: {cell.alpha = 1})
         return cell
     }
     

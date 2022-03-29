@@ -271,6 +271,8 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDelegateFlow
             cell.hourLabel.text = weather.hourString(dt: weather.hourly[indexPath.row].dt)
             cell.weatherLabel.text = "\(weather.temperatureToString(temp: weather.hourly[indexPath.row].temp))"
             cell.weatherImage.image = UIImage(systemName: weather.conditionName(conditionId: weather.hourly[indexPath.row].weather[0].id))
+            cell.alpha = 0
+            UIView.animate(withDuration: 1, animations: {cell.alpha = 1})
         }
                
         return cell
@@ -311,6 +313,8 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
             cell.dayLabel.text = date.weekDay
             cell.weatherImage.image = UIImage(systemName: weather.conditionName(conditionId: weather.daily[indexPath.row].weather[0].id))
             cell.tempLabel.text = "\(weather.temperatureToString(temp: weather.daily[indexPath.row].temp.day))/\(weather.temperatureToString(temp: weather.daily[indexPath.row].temp.night))"
+            cell.alpha = 0
+            UIView.animate(withDuration: 2, animations: {cell.alpha = 1})
             
         }
        
