@@ -15,6 +15,7 @@ struct WeatherAddData: Decodable {
     var timezone_offset: Int
     var hourly: [Hourly]
     var daily: [Daily]
+    var current: Current
 }
 
 
@@ -35,4 +36,9 @@ struct Daily: Decodable {
 struct Temp: Decodable {
     var day: Double
     var night: Double
+}
+
+struct Current: Decodable {
+    var sunrise: Int
+    var sunset: Int
 }

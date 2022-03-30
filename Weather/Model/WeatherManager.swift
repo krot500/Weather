@@ -16,7 +16,7 @@ protocol WeatherManagerDelegate {
 
 struct WeatherManager {
     var weatherURL = "https://api.openweathermap.org/data/2.5/weather?units=metric&appid=376b3473587c04767666da6e1a04b295"
-    var addWeatherURL = "https://api.openweathermap.org/data/2.5/onecall?&exclude=current,minutely,alerts&units=metric&appid=376b3473587c04767666da6e1a04b295"
+    var addWeatherURL = "https://api.openweathermap.org/data/2.5/onecall?&exclude=minutely,alerts&units=metric&appid=376b3473587c04767666da6e1a04b295"
     
     var delegate: WeatherManagerDelegate?
     
@@ -97,11 +97,14 @@ struct WeatherManager {
             let feelsLike = decodedData.main.feels_like
             let windSpeed = decodedData.wind.speed
             let windDeg = decodedData.wind.deg
+            let sunrise = decodedData.sys.sunrise
+            let sunset = decodedData.sys.sunset
+            let dt = decodedData.dt
             
             let weather = WeatherModel(cityName: cityName, conditionId: id,
                                        temperature: temperature, lat: lat, lon: lon,
                                        feelsLike: feelsLike, windSpeed: windSpeed,
-                                       windDeg: windDeg)
+                                       windDeg: windDeg, sunrise: sunrise, sunset: sunset, dt: dt)
             return weather
         } catch {
             delegate?.didFailWithError(error: error)
@@ -117,7 +120,11 @@ struct WeatherManager {
             let time_offset = decodedData.timezone_offset
             let hourlyWeather = decodedData.hourly
             let dailyWeather = decodedData.daily
-            let weather = WeatherAddModel(timezone_offset: time_offset, hourly: hourlyWeather, daily: dailyWeather)
+            let sunrise = decodedData.current.sunrise
+            let sunset = decodedData.current.sunset
+            let weather = WeatherAddModel(timezone_offset: time_offset, hourly: hourlyWeather, daily: dailyWeather,
+                                          sunrise: sunrise, sunset: sunset)
+            
             return weather
         } catch {
             delegate?.didFailWithError(error: error)

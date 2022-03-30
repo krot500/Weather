@@ -57,7 +57,7 @@
                                         </connections>
                                     </collectionView>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="hWi-tE-1Ie">
-                                        <rect key="frame" x="10" y="190" width="394" height="580"/>
+                                        <rect key="frame" x="10" y="190" width="394" height="600"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <connections>
                                             <outlet property="dataSource" destination="W40-4R-Fsx" id="Aqa-Wk-RfS"/>
@@ -76,7 +76,7 @@
                                     <constraint firstItem="hWi-tE-1Ie" firstAttribute="leading" secondItem="1pI-tG-gHy" secondAttribute="leading" constant="10" id="Swn-m0-cRf"/>
                                     <constraint firstItem="mQj-UH-QFu" firstAttribute="leading" secondItem="1pI-tG-gHy" secondAttribute="leading" constant="10" id="THj-fP-MOu"/>
                                     <constraint firstAttribute="trailing" secondItem="hVf-v4-gR9" secondAttribute="trailing" id="Wyq-G8-TS6"/>
-                                    <constraint firstAttribute="bottom" secondItem="hWi-tE-1Ie" secondAttribute="bottom" constant="30" id="egQ-Z4-fRP"/>
+                                    <constraint firstAttribute="bottom" secondItem="hWi-tE-1Ie" secondAttribute="bottom" constant="10" id="egQ-Z4-fRP"/>
                                     <constraint firstItem="hVf-v4-gR9" firstAttribute="top" secondItem="1pI-tG-gHy" secondAttribute="top" id="s5S-Zg-3D8"/>
                                 </constraints>
                             </scrollView>

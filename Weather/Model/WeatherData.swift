@@ -18,6 +18,8 @@ struct WeatherData: Decodable {
     var weather: [Weather]
     var coord: Coord
     var wind: Wind
+    var sys: Sys
+    var dt: Int
     
 }
 
@@ -38,4 +40,8 @@ struct Coord: Decodable {
 struct Wind: Decodable {
     var speed: Double
     var deg: Int
+}
+struct Sys: Decodable {
+    var sunrise: Int
+    var sunset: Int
 }

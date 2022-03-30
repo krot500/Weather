@@ -15,6 +15,15 @@ struct WeatherAddModel {
     var timezone_offset: Int
     var hourly: [Hourly]
     var daily: [Daily]
+    var sunrise: Int
+    var sunset: Int
+    
+    func isNight(dt: Int) -> Bool {
+        if dt > sunrise && dt < sunset {
+            return false
+        }
+        return true
+    }
     
     
     
@@ -30,22 +39,37 @@ struct WeatherAddModel {
     
     
     
-    func conditionName(conditionId: Int) -> String {
+    func conditionName(conditionId: Int, isNight: Bool) -> String {
         switch conditionId {
         case 200...232:
             return "cloud.bolt"
         case 300...321:
             return "cloud.drizzle"
-        case 500...531:
+        case 500...504:
+            if isNight {
+                return "cloud.moon.rain"
+            }
+            return "cloud.sun.rain"
+        case 511...531:
             return "cloud.rain"
         case 600...622:
             return "cloud.snow"
         case 701...781:
             return "cloud.fog"
         case 800:
+            if isNight {
+                return "moon"
+            }
             return "sun.max"
-        case 801...804:
+        case 801:
+            if isNight {
+                return "cloud.moon"
+            }
+            return "cloud.sun"
+        case 802:
             return "cloud"
+        case 803...804:
+            return "smoke"
         default:
             return "cloud"
         }

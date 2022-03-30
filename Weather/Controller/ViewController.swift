@@ -262,7 +262,7 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDelegateFlow
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
-        return 24
+        return 23
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -271,7 +271,8 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDelegateFlow
         if let weather = addWeather {
             cell.hourLabel.text = weather.hourString(dt: weather.hourly[indexPath.row].dt)
             cell.weatherLabel.text = "\(weather.temperatureToString(temp: weather.hourly[indexPath.row].temp))"
-            cell.weatherImage.image = UIImage(systemName: weather.conditionName(conditionId: weather.hourly[indexPath.row].weather[0].id))
+            cell.weatherImage.image = UIImage(systemName: weather.conditionName(conditionId: weather.hourly[indexPath.row].weather[0].id,
+                                                                                isNight: weather.isNight(dt: weather.hourly[indexPath.row].dt)))
             cell.alpha = 0
             UIView.animate(withDuration: 1, animations: {cell.alpha = 1})
         }
@@ -312,7 +313,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
             let date = weather.dayString(dt: weather.daily[indexPath.row].dt)
             cell.dateLabel.text = date.day
             cell.dayLabel.text = date.weekDay
-            cell.weatherImage.image = UIImage(systemName: weather.conditionName(conditionId: weather.daily[indexPath.row].weather[0].id))
+            cell.weatherImage.image = UIImage(systemName: weather.conditionName(conditionId: weather.daily[indexPath.row].weather[0].id, isNight: false))
             cell.tempLabel.text = "\(weather.temperatureToString(temp: weather.daily[indexPath.row].temp.day))/\(weather.temperatureToString(temp: weather.daily[indexPath.row].temp.night))"
             cell.alpha = 0
             UIView.animate(withDuration: 2, animations: {cell.alpha = 1})
@@ -333,7 +334,8 @@ extension ViewController: WeatherManagerDelegate {
     
     func didUpdateWeatherAdditional(_ weatherManager: WeatherManager, weather: WeatherAddModel) {
         DispatchQueue.main.async {
-            self.addWeather = WeatherAddModel(timezone_offset: weather.timezone_offset, hourly: weather.hourly, daily: weather.daily)
+            self.addWeather = WeatherAddModel(timezone_offset: weather.timezone_offset, hourly: weather.hourly,
+                                              daily: weather.daily, sunrise: weather.sunrise, sunset: weather.sunset)
             self.hourlyWeather.reloadData()
             self.dailyWeatherTable.reloadData()
         }
