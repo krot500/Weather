@@ -7,7 +7,6 @@
         <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
-        <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -37,16 +36,7 @@
                                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                 </collectionViewFlowLayout>
-                                                <cells>
-                                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="6Uy-4p-6RQ">
-                                                        <rect key="frame" x="0.0" y="26" width="128" height="128"/>
-                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="OKa-25-FOO">
-                                                            <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
-                                                            <autoresizingMask key="autoresizingMask"/>
-                                                        </collectionViewCellContentView>
-                                                    </collectionViewCell>
-                                                </cells>
+                                                <cells/>
                                                 <connections>
                                                     <outlet property="dataSource" destination="W40-4R-Fsx" id="Mtr-rf-oUE"/>
                                                     <outlet property="delegate" destination="W40-4R-Fsx" id="nwV-Zo-msf"/>
@@ -93,13 +83,9 @@
                                 <rect key="frame" x="20" y="44" width="374" height="40"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bWz-hn-dBK">
-                                        <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="40" id="7Xt-j4-idM"/>
-                                            <constraint firstAttribute="height" constant="40" id="Iv6-AK-QXv"/>
-                                        </constraints>
-                                        <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="plain" image="list.dash" catalog="system" title=" "/>
+                                        <rect key="frame" x="0.0" y="0.0" width="27" height="40"/>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal" title=" " image="list.dash" catalog="system"/>
                                         <connections>
                                             <action selector="toListOfCity:" destination="W40-4R-Fsx" eventType="touchUpInside" id="dAu-Tb-cZp"/>
                                         </connections>
@@ -114,13 +100,9 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RgC-BC-rIc">
-                                        <rect key="frame" x="334" y="0.0" width="40" height="40"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="40" id="HS1-DH-ydC"/>
-                                            <constraint firstAttribute="height" constant="40" id="lSx-Ix-D32"/>
-                                        </constraints>
-                                        <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="plain" image="star" catalog="system" title=" "/>
+                                        <rect key="frame" x="347" y="0.0" width="27" height="40"/>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal" title=" " image="star" catalog="system"/>
                                         <connections>
                                             <action selector="makeStar:" destination="W40-4R-Fsx" eventType="touchUpInside" id="m4e-3P-V7z"/>
                                         </connections>
@@ -153,10 +135,10 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8gg-Kd-IZY">
                                 <rect key="frame" x="0.0" y="44" width="414" height="944"/>
                                 <subviews>
-                                    <visualEffectView opaque="NO" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dcg-te-wdv">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="934"/>
+                                    <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dcg-te-wdv">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="944"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="U9a-dA-B8f">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="934"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="944"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome to Weather app" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EyB-UD-32d">
@@ -331,10 +313,13 @@
                                     <constraint firstAttribute="bottom" secondItem="ryf-58-ggS" secondAttribute="bottom" id="reA-Mk-r7A"/>
                                 </constraints>
                             </stackView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="myw-8x-mn0">
-                                <rect key="frame" x="20" y="69" width="56" height="31"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="Back"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="myw-8x-mn0">
+                                <rect key="frame" x="20" y="64" width="12.5" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="xC0-hz-ngp"/>
+                                </constraints>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" image="chevron.left" catalog="system"/>
                                 <connections>
                                     <action selector="backToWeatherWithDender:" destination="lYr-V1-8Sf" eventType="touchUpInside" id="un5-dC-Svv"/>
                                 </connections>
@@ -345,7 +330,7 @@
                         <constraints>
                             <constraint firstItem="mYI-FY-gHO" firstAttribute="trailing" secondItem="Oel-ju-kMD" secondAttribute="trailing" constant="20" id="8x5-MQ-yJn"/>
                             <constraint firstItem="mYI-FY-gHO" firstAttribute="bottom" secondItem="Oel-ju-kMD" secondAttribute="bottom" constant="30" id="SjX-XI-Neg"/>
-                            <constraint firstItem="myw-8x-mn0" firstAttribute="top" secondItem="mYI-FY-gHO" secondAttribute="top" constant="25" id="VKX-j7-nSc"/>
+                            <constraint firstItem="myw-8x-mn0" firstAttribute="top" secondItem="mYI-FY-gHO" secondAttribute="top" constant="20" id="VKX-j7-nSc"/>
                             <constraint firstItem="Oel-ju-kMD" firstAttribute="leading" secondItem="mYI-FY-gHO" secondAttribute="leading" constant="20" id="lOE-Xb-gdy"/>
                             <constraint firstItem="Oel-ju-kMD" firstAttribute="top" secondItem="mYI-FY-gHO" secondAttribute="top" constant="20" id="r9x-gc-Cuf"/>
                             <constraint firstItem="myw-8x-mn0" firstAttribute="leading" secondItem="mYI-FY-gHO" secondAttribute="leading" constant="20" id="s6M-m9-jAv"/>
@@ -364,6 +349,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="chevron.left" catalog="system" width="96" height="128"/>
         <image name="list.dash" catalog="system" width="128" height="85"/>
         <image name="magnifyingglass" catalog="system" width="128" height="115"/>
         <image name="star" catalog="system" width="128" height="116"/>
