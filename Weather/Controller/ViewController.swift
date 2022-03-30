@@ -20,9 +20,18 @@ class ViewController: UIViewController {
     var city = [City]()
     var cityName: String = ""
     
+    let refreshControl: UIRefreshControl = {
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(refresh(sender:)), for: .valueChanged)
+        
+        return refreshControl
+    }()
+    
     
     //MARK: - OUTLETS
 
+    
+    @IBOutlet weak var scrollView: UIScrollView!
     
     @IBOutlet weak var hourlyWeather: UICollectionView!
     
@@ -55,6 +64,7 @@ class ViewController: UIViewController {
         loadCityList()
         cofigureTextField()
         weatherManager.delegate = self
+        scrollView.refreshControl = refreshControl
         
         
              
@@ -151,6 +161,17 @@ class ViewController: UIViewController {
         }
     }
     
+    
+    @objc
+    private func refresh(sender: UIRefreshControl) {
+        if let name = cityLabel.text{
+            weatherManager.fetchWeather(cityName: name)
+            hourlyWeather.reloadData()
+            dailyWeatherTable.reloadData()
+        }
+        sender.endRefreshing()
+        
+    }
     
     
         // function to configure first weather info, when app is launching

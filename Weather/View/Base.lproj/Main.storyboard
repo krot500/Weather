@@ -237,6 +237,7 @@
                         <outlet property="feelsLikeWinterLabel" destination="xrB-P9-Amo" id="Ym5-0K-3K0"/>
                         <outlet property="hourlyWeather" destination="mQj-UH-QFu" id="9oe-n4-dP9"/>
                         <outlet property="menuButton" destination="bWz-hn-dBK" id="OiC-hb-wqW"/>
+                        <outlet property="scrollView" destination="1pI-tG-gHy" id="wyw-KQ-dmX"/>
                         <outlet property="starButton" destination="RgC-BC-rIc" id="fPI-1H-suM"/>
                         <outlet property="tempLabel" destination="Sfb-tI-BoI" id="bfw-Hj-yQA"/>
                         <outlet property="weaherImage" destination="0EN-pv-3LJ" id="byF-e9-2FM"/>
